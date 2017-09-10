@@ -1,10 +1,13 @@
+from cell import Cell
+
 class Board(object):
     def __init__(self, board_size = 19):
         self.__board_size = board_size
         self.state = self.opening_state(board_size)
 
     def isValidState(self, state):
-        instanceOfCell = [j == "cell" for i in state for j in i]
+        instanceOfCell = [isinstance(j, Cell) for i in state for j in i]
+
         if not instanceOfCell or not all(instanceOfCell):
             raise ValueError("Invalid state: one or more cells is not an instance of Cell class")
         elif len(instanceOfCell) != self.board_size * self.board_size:
@@ -13,8 +16,7 @@ class Board(object):
             return True
 
     def opening_state(self, board_size):
-        # replace "cell" with cell data structure:
-        return [["cell" for j in range(board_size)] for i in range(board_size)]
+        return [[Cell(i, j, board_size) for j in range(board_size)] for i in range(board_size)]
 
     @property
     def board_size(self):
