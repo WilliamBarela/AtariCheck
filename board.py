@@ -3,9 +3,22 @@ class Board(object):
         self.__board_size = board_size
         self.state = self.opening_state(board_size)
 
+    def isValidState(self, state):
+        instanceOfCell = [j == "cell" for i in state for j in i]
+        if not instanceOfCell or not all(instanceOfCell):
+            raise ValueError("Invalid state: one or more cells is not an instance of Cell class")
+        elif len(instanceOfCell) != self.board_size * self.board_size:
+            raise ValueError("Invalid board size: insufficient cells instantiated")
+        else:
+            return True
+
     def opening_state(self, board_size):
         # replace "cell" with cell data structure:
         return [["cell" for j in range(board_size)] for i in range(board_size)]
+
+    @property
+    def board_size(self):
+        return self.__board_size
 
     @property
     def state(self):
@@ -13,6 +26,4 @@ class Board(object):
 
     @state.setter
     def state(self, new_state):
-        instanceOfCell = [j == "cell" for i in new_state for j in i]
-        if not instanceOfCell: instanceOfCell = [False] # checks if empty set
-        if all(instanceOfCell): self.__state = new_state
+        if self.isValidState(new_state): self.__state = new_state
