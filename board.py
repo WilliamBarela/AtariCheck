@@ -16,10 +16,15 @@ class Board(object):
             return True
 
     # FIXME: create rules for a valid stone placement
-    def isValidMove(i, j, color):
-        return False
-        # set rules (remember ko)
-        # no stone may be placed if one is already placed
+    def isValidMove(self, i, j, color):
+        board = self.state
+        cell = board[i][j]
+        if (cell.isOnBoard(i) and cell.isOnBoard(j)) and cell.color is not None:
+            raise ValueError("Stone has already been placed at %(r)s, %(c)s" % {"r": i, "c": j})
+        #elif cell.isInAtari:
+            # raise ValueError ("Invalid move: ko (suicide) would result")
+        else:
+            return True
 
     def opening_state(self, board_size):
         return [[Cell(i, j, board_size) for j in range(board_size)] for i in range(board_size)]
@@ -37,6 +42,8 @@ class Board(object):
         if self.isValidState(new_state): self.__state = new_state
 
     # FIXME: create Cell.init_stone method
-    def place_stone(i, j, color):
-        cell = self.state[i][j]
-        if self.isValidMove(i, j, color): cell.init_stone(color)
+    def place_stone(self, i, j, color):
+        board = self.state
+        cell = board[i][j]
+        if self.isValidMove(i, j, color): 
+            cell.color = color
