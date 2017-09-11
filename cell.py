@@ -1,4 +1,5 @@
 class Cell(object):
+    # FIXME: add board_size setter and getter with validations
     def __init__(self, i, j, board_size):
         self._board_size = board_size
         self.i = i
@@ -18,6 +19,8 @@ class Cell(object):
 
         if color not in valid_colors:
             raise ValueError("Color invalid: (choose: None, black, or white)")
+        elif hasattr(self, "color") and self.color is not None:
+            raise ValueError("Color cannot be changed once set")
         else:
             return True
 
