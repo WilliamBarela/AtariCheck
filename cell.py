@@ -109,10 +109,19 @@ class Cell(object):
 
     @property
     def liberties(self):
+        self.update_liberties()
         return self.__liberties
 
+    def update_liberties(self):
+        self.__liberties = {"north": self.N, "south": self.S, "west": self.W, "east": self.E}
+
     def init_liberties(self):
-        return {"north"}
+        self.N = "edge" if self.i == 0 else None
+        self.S = "edge" if self.i == (self.board_size - 1) else None 
+        self.W = "edge" if self.j == 0 else None
+        self.E = "edge" if self.j == (self.board_size - 1) else None
+        
+        return {"north": self.N, "south": self.S, "west": self.W, "east": self.E}
 
     @property
     def N(self):
