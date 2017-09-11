@@ -31,6 +31,41 @@ class Cell(object):
         else:
             return True
 
+    def isLiberty(self, liberty):
+        valid_liberties = ["edge", None, "black", "white"]
+
+        if liberty not in valid_liberties:
+            raise ValueError("Liberty invalid: (choose: edge, None, black or White.)")
+        else:
+            return True
+    
+    def isValidNLiberty(self, N):
+        if self.isLiberty(N):
+            if self.i == 0 and N is not "edge":
+                raise ValueError("N liberty in 0th row must be set to 'edge'")
+            elif self.i > 0 and N is "edge":
+                raise ValueError("N liberty can only be 'edge' in 0th row")
+            else:
+                return True
+    
+#    def isValidSLiberty(self, S):
+#        if self.i == (self.board_size - 1) and S is not "edge":
+#            raise ValueError("S liberty in last row must be set to 'edge'")
+#        else:
+#            return True
+#
+#    def isValidELiberty(self, E):
+#        if self.j == 0 and E is not "edge":
+#            raise ValueError("E liberty in 0th column must be set to 'edge'")
+#        else:
+#            return True
+#    
+#    def isValidWLiberty(self, W):
+#        if self.j == (self.board_size - 1) and W is not "edge":
+#            raise ValueError("W liberty in last row must be set to 'edge'")
+#        else:
+#            return True
+
     @property
     def board_size(self):
         return self.__board_size
@@ -69,3 +104,11 @@ class Cell(object):
 
     def init_liberties(self):
         return {"north"}
+
+    @property
+    def N(self):
+        return self.__N
+
+    @N.setter
+    def N(self, N):
+        if isValidNLiberty(): self.__N = N
