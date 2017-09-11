@@ -1,4 +1,8 @@
+import csv
+from IPython.core import debugger
+debug = debugger.Pdb().set_trace
 from cell import Cell
+
 
 class Board(object):
     def __init__(self, board_size = 19):
@@ -45,5 +49,22 @@ class Board(object):
         board = self.state
         cell = board[i][j]
         if self.isValidMove(i, j, color): 
-            cell.color = color
+            cell.color = None if color is "" else color 
+            print "At: " + str(i) + ", " + str(j)  +  ": cell color: " + color
             cell.update_liberties_from_board(self.state)
+        #return cell
+
+    def import_board(self, csv_file = "go.csv"):
+        # be sure to include one more row in csv file
+        with open(csv_file, 'rb') as rawCsv:
+            readCsv = csv.reader(rawCsv)
+            go = [row for row in readCsv]
+            go.pop()
+            if len(go) is not self.board_size or len(go[0]) is not self.board_size:
+                raise ValueError("Imported data does not match board size.")
+            return go
+
+    def set_board(self, csv_file = "go.csv"):
+        board = self.import_board(csv_file)
+        [[self.place_stone(i, j, board[i][j]) for j in range(len(board[0]))] for i in range(len(board))]
+
