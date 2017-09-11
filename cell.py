@@ -105,12 +105,50 @@ class Cell(object):
 
     @color.setter
     def color(self, color):
-        if self.isValidColor(color): self.__color = color
+        if self.isValidColor(color): 
+            self.__color = color
+            
+
 
     @property
     def liberties(self):
         self.update_liberties()
         return self.__liberties
+
+    def update_liberties_from_board(self, board):
+        # sets N liberty for self and adjacent cell
+        if self.i == 0:
+            self.N = "edge" 
+        else:
+            cellN = board[self.i - 1][self.j]
+            self.N = cellN.color
+            cellN.S = self.color
+
+        # sets S liberty for self and adjacent cell
+        if self.i == (self.board_size - 1):
+            self.S = "edge"
+        else:
+            cellS = board[self.i + 1][self.j]
+            self.S = cellS.color 
+            cellS.N = self.color
+
+        # sets W liberty for self and adjacent cell
+        if self.j == 0:
+            self.W = "edge" 
+        else:
+            cellW = board[self.i][self.j - 1]
+            self.W = cellW.color
+            cellW.E = self.color
+
+        # sets E liberty for self and adjacent cell
+        if self.j == (self.board_size - 1):
+            self.E = "edge"
+        else:
+            cellE = board[self.i][self.j + 1]
+            self.E = cellE.color
+            cellE.W = self.color
+
+        self.update_liberties()
 
     def update_liberties(self):
         self.__liberties = {"north": self.N, "south": self.S, "west": self.W, "east": self.E}

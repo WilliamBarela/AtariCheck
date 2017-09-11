@@ -41,9 +41,9 @@ class Board(object):
     def state(self, new_state):
         if self.isValidState(new_state): self.__state = new_state
 
-    # FIXME: create Cell.init_stone method
     def place_stone(self, i, j, color):
         board = self.state
         cell = board[i][j]
         if self.isValidMove(i, j, color): 
             cell.color = color
+            cell.update_liberties_from_board(self.state)
