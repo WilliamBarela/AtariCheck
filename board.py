@@ -17,6 +17,7 @@ class Board(object):
 
     # FIXME: create rules for a valid stone placement
     def isValidMove(i, j, color):
+        return False
         # set rules (remember ko)
         # no stone may be placed if one is already placed
 
@@ -36,6 +37,6 @@ class Board(object):
         if self.isValidState(new_state): self.__state = new_state
 
     # FIXME: create Cell.init_stone method
-    def place_stone(i, j, color)
+    def place_stone(i, j, color):
         cell = self.state[i][j]
         if self.isValidMove(i, j, color): cell.init_stone(color)
