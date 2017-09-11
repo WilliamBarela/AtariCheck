@@ -57,12 +57,15 @@ class Cell(object):
             else:
                 return True
 
-#    def isValidELiberty(self, E):
-#        if self.j == 0 and E is not "edge":
-#            raise ValueError("E liberty in 0th column must be set to 'edge'")
-#        else:
-#            return True
-#    
+    def isValidELiberty(self, E):
+        if self.isLiberty(E):
+            if self.j == 0 and E is not "edge":
+                raise ValueError("E liberty in 0th column must be set to 'edge'")
+            elif self.j > 0 and E is "edge":
+                raise ValueError("E liberty can only be 'edge' in 0th column")
+            else:
+                return True
+    
 #    def isValidWLiberty(self, W):
 #        if self.j == (self.board_size - 1) and W is not "edge":
 #            raise ValueError("W liberty in last row must be set to 'edge'")
