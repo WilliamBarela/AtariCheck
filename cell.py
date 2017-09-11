@@ -120,4 +120,28 @@ class Cell(object):
 
     @N.setter
     def N(self, N):
-        if isValidNLiberty(): self.__N = N
+        if self.isValidNLiberty(N): self.__N = N
+    
+    @property
+    def S(self):
+        return self.__S
+
+    @S.setter
+    def S(self, S):
+        if self.isValidSLiberty(S): self.__S = S
+
+    @property
+    def W(self):
+        return self.__W
+
+    @W.setter
+    def W(self, W):
+        if self.isValidWLiberty(W): self.__W = W
+
+    @property
+    def E(self):
+        return self.__E
+
+    @E.setter
+    def E(self, E):
+        if self.isValidELiberty(E): self.__E = E
