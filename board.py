@@ -54,7 +54,7 @@ class Board(object):
             cell.update_liberties_from_board(self.state)
         #return cell
 
-    def import_board(self, csv_file = "go.csv"):
+    def import_board(self, csv_file = "csv/go.csv"):
         # be sure to include one more row in csv file
         with open(csv_file, 'rb') as rawCsv:
             readCsv = csv.reader(rawCsv)
@@ -64,7 +64,7 @@ class Board(object):
                 raise ValueError("Imported data does not match board size.")
             return go
 
-    def set_board(self, csv_file = "go.csv"):
+    def set_board(self, csv_file = "csv/go.csv"):
         board = self.import_board(csv_file)
         [[self.place_stone(i, j, board[i][j]) for j in range(len(board[0]))] for i in range(len(board))]
 
