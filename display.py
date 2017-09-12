@@ -2,8 +2,8 @@ from board import Board
 from cell import Cell
 
 class Display(Board):
-    def __init__(self):
-        Board.__init__(self)
+    def __init__(self, board_size):
+        Board.__init__(self, board_size)
 
     def board(self):
         m_dash = "---"
