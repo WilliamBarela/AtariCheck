@@ -14,6 +14,8 @@ Future features planned to extend this project include the addition of a CLI cla
       #Display(13) instantiates a 13x13
       go = Display()    
   ```
+![19X19](https://raw.githubusercontent.com/WilliamBarela/AtariCheck/master/img/go_board19x19.png)
+
 
 ### Place black and white stones:
   ```py
@@ -23,6 +25,8 @@ Future features planned to extend this project include the addition of a CLI cla
       go.place_stone(7, 6, "white")
       go.place_stone(8, 7, "white")
   ```
+![19X19_filled](https://raw.githubusercontent.com/WilliamBarela/AtariCheck/master/img/go_board19x19_filled.png)
+
 
 ### Query cell information (stone color, liberties, etc.):
   ```py
