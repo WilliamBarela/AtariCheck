@@ -107,8 +107,24 @@ class Cell(object):
     def color(self, color):
         if self.isValidColor(color): 
             self.__color = color
-            
+            self.display = self.color
 
+    @property
+    def display(self):
+        return self.__display
+
+    @display.setter
+    def display(self, color):
+        black = u'\u25CB'
+        white = u'\u25CF'
+        blank = " "
+
+        if color == "black":
+            self.__display = black
+        elif color == "white":
+            self.__display = white
+        else:
+            self.__display = blank
 
     @property
     def liberties(self):
