@@ -3,7 +3,7 @@ from cell import Cell
 from os import system
 
 class Display(Board):
-    def __init__(self, board_size):
+    def __init__(self, board_size = 19):
         Board.__init__(self, board_size)
         self.clear_screen()
         self.board()
