@@ -4,6 +4,7 @@ class Cell(object):
         self.i = i
         self.j = j
         self.color = None
+        self.display = " "
         self.__liberties = self.init_liberties()
         # add liberties
 
