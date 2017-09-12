@@ -8,7 +8,33 @@ Future features planned to extend this project include the addition of a CLI cla
 
 ## API usage:
 ### Import Display and instantiate a board:
+  ```py
+      from display import Display
+
+      #Display(13) instantiates a 13x13
+      go = Display()    
+  ```
 
 ### Place black and white stones:
+  ```py
+      go.place_stone(2, 3, "white")
+      go.place_stone(7, 7, "black")
+      go.place_stone(7, 8, "white")
+      go.place_stone(7, 6, "white")
+      go.place_stone(8, 7, "white")
+  ```
 
 ### Query cell information (stone color, liberties, etc.):
+  ```py
+      go.state[7][7].color 
+      #> 'black'
+      
+      go.state[7][7].liberties 
+      #> {'east': 'white', 'north': None, 'south': 'white', 'west': 'white'}
+      
+      go.state[0][0].liberties
+      #> {'east': None, 'north': 'edge', 'south': None, 'west': 'edge'}
+      
+      go.state[8][7].N
+      #> 'black'
+  ```
